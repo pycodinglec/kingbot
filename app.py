@@ -51,3 +51,15 @@ if prompt := st.chat_input(placeholder="메시지를 입력하세요...", disabl
     # Generate response
     if prompt == '떽!':
         response = "메롱!"
+        st.session_state.flag = True
+        st.rerun()
+    else:
+        response = sentence_converter(prompt)
+
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
+
+    # Display assistant response
+    time.sleep(0.3)
+    with st.chat_message("assistant"):
+        st.markdown(response)
